@@ -28,7 +28,7 @@ public class MockAdDetailNetService implements AdDetailNetService {
     private AdDetailsRestModel createMock() {
         AdDetailsRestModel result = new AdDetailsRestModel();
         result.setPrice(100);
-        result.setAddressDetail(new AddressDetail("10.222","11.222","A random place"));
+        result.setAddressDetail(new AddressDetail("51.4589136","-0.3062386","A random place"));
         result.setContactInformation(new ContactInformation("323232323","Test","test@mail.com"));
         result.setTitle("Test ad for demo");
         result.setImageUrls(new ArrayList<String>(Arrays.asList("https://dummyimage.com/600x400/6e4a6e/ffffff&text=Image+1",

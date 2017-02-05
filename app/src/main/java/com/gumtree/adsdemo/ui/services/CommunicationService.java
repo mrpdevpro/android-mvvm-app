@@ -51,4 +51,11 @@ public class CommunicationService {
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, subject);
         context.startActivity(Intent.createChooser(sharingIntent, context.getString(R.string.share)));
     }
+
+    public void openMap(String geoLat, String geoLng) {
+        Intent i = new Intent(Intent.ACTION_VIEW,Uri.parse(String.format("geo:%s,%s",geoLat,geoLng)));
+        i.setClassName("com.google.android.apps.maps",
+                "com.google.android.maps.MapsActivity");
+        context.startActivity(i);
+    }
 }

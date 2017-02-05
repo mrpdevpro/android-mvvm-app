@@ -36,12 +36,16 @@ public class AdDetailsActivity extends GumTreeActivity {
         ActivityAdDetailsBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_ad_details);
         binding.setViewModel(viewModel);
 
+        formatUI(binding);
+
+
+    }
+
+    private void formatUI(ActivityAdDetailsBinding binding) {
         ((RecyclerView)binding.getRoot().findViewById(R.id.listProperties)).setLayoutManager(new LinearLayoutManager(this));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
     }
 
     @Override

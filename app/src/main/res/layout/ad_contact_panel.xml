@@ -35,39 +35,27 @@
             android:text="@{viewModel.datePosted}"/>
     </LinearLayout>
     <RelativeLayout
-
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_red_light"
+            style="@style/ContactButton"
             android:text="@string/call"
             android:onClick="@{()->viewModel.makePhoneCallCommand()}"
             android:layout_alignParentStart="true"
-            android:textAllCaps="true"
             />
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_red_light"
+            style="@style/ContactButton"
             android:text="@string/sms"
             android:onClick="@{()->viewModel.sendSMSCommand()}"
             android:layout_centerHorizontal="true"
-            android:textAllCaps="true"
             />
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_red_light"
+            style="@style/ContactButton"
             android:text="@string/email"
             android:onClick="@{()->viewModel.sendEmailCommand()}"
-            android:elevation="5dp"
-            android:textColor="#fff"
-            android:shadowColor="@color/colorPrimary"
             android:layout_alignParentRight="true"
-            android:textAllCaps="true"
             />
     </RelativeLayout>
     </LinearLayout>

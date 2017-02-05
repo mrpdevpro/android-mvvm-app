@@ -93,6 +93,8 @@
                 <include layout="@layout/ad_date_details"
                     bind:viewModel="@{viewModel}"
                     ></include>
+                <include layout="@layout/simple_divider"></include>
+
                 <include layout="@layout/ad_extra_properties"
                     bind:viewModel="@{viewModel}">
 

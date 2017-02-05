@@ -5,6 +5,7 @@ import com.gumtree.adsdemo.RxImmediateSchedulerRule;
 import com.gumtree.adsdemo.addetails.domain.AdDetailDomainService;
 import com.gumtree.adsdemo.addetails.domain.AdDetailModel;
 import com.gumtree.adsdemo.addetails.net.models.AdDetailsRestModel;
+import com.gumtree.adsdemo.addetails.net.models.AddressDetail;
 import com.gumtree.adsdemo.addetails.net.models.ContactInformation;
 import com.gumtree.adsdemo.ui.services.CommunicationService;
 import com.gumtree.adsdemo.ui.services.DialogService;
@@ -24,6 +25,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 /**
@@ -149,8 +151,37 @@ public class AdDetailViewModelTest {
 
         verify(dialogService).displaySimpleMessage(anyString());
     }
+    @Test
+    public void test_openMapCommand_With_Correct_Information_Invokes_Map() throws Exception {
+        //when(textProvider.getString(R.string.map_location_invalid)).thenReturn(anyString());
+        AdDetailModel detailModel = new AdDetailModel(new AdDetailsRestModel());
+        detailModel.getValue().setTitle("test");
+        detailModel.getValue().setAddressDetail(new AddressDetail("0.0","0.0","Place 1"));
 
+        when(service.getDetail(anyString())).thenReturn(Observable.just(detailModel));
 
+        viewModel.start(anyString());
+        viewModel.openMapCommand();
+
+        verifyZeroInteractions(dialogService);
+        verify(communicationService).openMap(anyString(),anyString());
+
+    }
+    @Test
+    public void test_openMapCommand_With_Invalid_Information_Invokes_Dialog() throws Exception {
+        when(textProvider.getString(R.string.map_location_invalid)).thenReturn("");
+        AdDetailModel detailModel = new AdDetailModel(new AdDetailsRestModel());
+        detailModel.getValue().setTitle("test");
+        detailModel.getValue().setAddressDetail(new AddressDetail(null,null,"Place 1"));
+
+        when(service.getDetail(anyString())).thenReturn(Observable.just(detailModel));
+
+        viewModel.start(anyString());
+        viewModel.openMapCommand();
+
+        verifyZeroInteractions(communicationService);
+        verify(dialogService).displaySimpleMessage(anyString());
+    }
     @Test
     public void stop() throws Exception {
 

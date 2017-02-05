@@ -101,4 +101,5 @@
     <string name="bookmark">bookmark</string>
     <string name="share_subject">Saw this on GumTree</string>
     <string name="bookmark_sent">bookmark saved</string>
+    <string name="map_location_invalid">opening the map is unavailable</string>
 </resources>

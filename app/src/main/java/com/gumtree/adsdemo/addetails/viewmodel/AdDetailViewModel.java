@@ -85,6 +85,8 @@ public class AdDetailViewModel extends BaseObservable {
         imageUrls.set(model.getValue().getImageUrls());
         price.set(String.format("£ %5.2f", model.getValue().getPrice()));
         additionalInformationList.addAll( model.getValue().getAdditionalInformation());
+
+
     }
 
     public void stop() {
@@ -114,4 +116,11 @@ public class AdDetailViewModel extends BaseObservable {
         dialogService.displaySimpleMessage(textProvider.getString(R.string.bookmark_sent));
     }
 
+    public void openMapCommand(){
+        if(addressDetail.get().getGeoLng() == null || addressDetail.get().getGeoLat() == null){
+            dialogService.displaySimpleMessage(textProvider.getString(R.string.map_location_invalid));
+        }else {
+            communicationService.openMap(addressDetail.get().getGeoLat(), addressDetail.get().getGeoLng());
+        }
+    }
 }

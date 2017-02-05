@@ -15,7 +15,8 @@ public class MainViewModel extends BaseObservable {
         this.navigationService = navigationService;
     }
 
-    public void gotoDetailsCommand(String commandId){
+    public void gotoDetailsCommand(){
+        String commandId = "123455";
         navigationService.gotoDetails(commandId);
     }
 }

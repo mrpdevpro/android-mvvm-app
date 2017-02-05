@@ -12,5 +12,22 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.gumtree.adsdemo.ads.MainActivity"
     tools:showIn="@layout/activity_main">
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_launcher"
+    android:id="@+id/launcer"
+    android:layout_centerInParent="true"
+    />
 
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_arrow_forward"
+        android:layout_marginLeft="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_marginTop="63dp"
+        android:layout_below="@+id/launcer"
+
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>

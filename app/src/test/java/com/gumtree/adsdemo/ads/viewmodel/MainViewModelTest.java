@@ -23,7 +23,7 @@ public class MainViewModelTest {
     }
     @Test
     public void test_gotoDetailsCommand_Invokes_NavigationService() throws Exception {
-        mainViewModel.gotoDetailsCommand(anyString());
+        mainViewModel.gotoDetailsCommand();
 
         verify(navigationService).gotoDetails(anyString());
     }

@@ -18,6 +18,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="2dp"
         android:orientation="horizontal"
         >
         <TextView
@@ -25,14 +26,17 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
-            android:text="@{viewModel.contactName}"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:text="@{@string/contact_name_placeholder+ viewModel.contactName}"
             />
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|end"
-            android:text="@{viewModel.datePosted}"/>
+            android:textStyle="bold"
+            android:text="@{@string/contact_date_posting_from+viewModel.datePosted}"/>
     </LinearLayout>
     <RelativeLayout
         android:padding="10dp"

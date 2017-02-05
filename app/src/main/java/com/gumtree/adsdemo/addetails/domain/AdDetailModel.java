@@ -24,7 +24,7 @@ public class AdDetailModel   {
     private void transform(AdDetailsRestModel model) {
         //some validations
         if(this.model.getContactInformation() == null)
-            model.setContactInformation(new ContactInformation("",""));
+            model.setContactInformation(new ContactInformation("","",""));
         if(this.model.getAdditionalInformation() == null)
             model.setAdditionalInformation(new ArrayList<>());
         if(model.getAddressDetail() == null)

@@ -95,4 +95,6 @@
     <string name="call">Call</string>
     <string name="sms">sms</string>
     <string name="email">email</string>
+    <string name="image_description">image</string>
+    <string name="email_template">Hi I am interested for the above ad</string>
 </resources>

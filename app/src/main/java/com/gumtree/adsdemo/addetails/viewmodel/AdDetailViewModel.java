@@ -5,10 +5,13 @@ import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 import android.util.Log;
 
+import com.gumtree.adsdemo.R;
 import com.gumtree.adsdemo.addetails.domain.AdDetailDomainService;
 import com.gumtree.adsdemo.addetails.domain.AdDetailModel;
 import com.gumtree.adsdemo.addetails.net.models.AdditionalInformation;
 import com.gumtree.adsdemo.addetails.net.models.AddressDetail;
+import com.gumtree.adsdemo.ui.services.CommunicationService;
+import com.gumtree.adsdemo.ui.services.TextProvider;
 
 import java.util.ArrayList;
 
@@ -20,15 +23,21 @@ import rx.Subscription;
 
 public class AdDetailViewModel extends BaseObservable {
     private AdDetailDomainService adDetailNetService;
+    private final CommunicationService communicationService;
+    private final TextProvider textProvider;
     private Subscription subscription;
 
-    public AdDetailViewModel(AdDetailDomainService adDetailNetService) {
+    public AdDetailViewModel(AdDetailDomainService adDetailNetService, CommunicationService communicationService,TextProvider textProvider) {
         this.adDetailNetService = adDetailNetService;
+        this.communicationService = communicationService;
+        this.textProvider = textProvider;
     }
 
     public ObservableField<String> contactName = new ObservableField<>();
 
     public ObservableField<String> contactTel = new ObservableField<>();
+
+    public ObservableField<String> contactEmail = new ObservableField<>();
 
     public ObservableField<String> title = new ObservableField<>();
 
@@ -65,6 +74,7 @@ public class AdDetailViewModel extends BaseObservable {
         datePosted.set(model.getValue().getDatePosted());
         contactName.set(model.getValue().getContactInformation().getName());
         contactTel.set(model.getValue().getContactInformation().getTelephone());
+        contactEmail.set(model.getValue().getContactInformation().getEmail());
         addressDetail.set(model.getValue().getAddressDetail());
         imageUrls.set(model.getValue().getImageUrls());
         price.set(String.format("£ %5.2f", model.getValue().getPrice()));
@@ -75,5 +85,17 @@ public class AdDetailViewModel extends BaseObservable {
         if (subscription != null && !subscription.isUnsubscribed()) {
             subscription.unsubscribe();
         }
+    }
+
+    public void sendSMSCommand(){
+        communicationService.sendSMS( contactTel.get());
+    }
+
+    public void sendEmailCommand(){
+        communicationService.sendEmail(contactEmail.get(),title.get(),textProvider.getString(R.string.email_template));
+    }
+
+    public void makePhoneCallCommand(){
+        communicationService.call(contactTel.get());
     }
 }

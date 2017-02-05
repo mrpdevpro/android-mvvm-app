@@ -4,6 +4,9 @@ import com.gumtree.adsdemo.RxImmediateSchedulerRule;
 import com.gumtree.adsdemo.addetails.domain.AdDetailDomainService;
 import com.gumtree.adsdemo.addetails.domain.AdDetailModel;
 import com.gumtree.adsdemo.addetails.net.models.AdDetailsRestModel;
+import com.gumtree.adsdemo.addetails.net.models.ContactInformation;
+import com.gumtree.adsdemo.ui.services.CommunicationService;
+import com.gumtree.adsdemo.ui.services.TextProvider;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -15,7 +18,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 import rx.Observable;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -27,6 +32,12 @@ import static org.mockito.Mockito.when;
 public class AdDetailViewModelTest {
     @Mock
     AdDetailDomainService service;
+
+    @Mock
+    CommunicationService communicationService;
+
+    @Mock
+    TextProvider textProvider;
     @Rule
     public RxImmediateSchedulerRule rxSchedulersTestRule = new RxImmediateSchedulerRule();
 
@@ -34,7 +45,7 @@ public class AdDetailViewModelTest {
 
     @Before
     public void setUp() throws Exception {
-        viewModel = new AdDetailViewModel(service);
+        viewModel = new AdDetailViewModel(service,communicationService,textProvider);
     }
 
     @Test
@@ -66,9 +77,48 @@ public class AdDetailViewModelTest {
 
         viewModel.start(anyString());
 
-        assertTrue(viewModel.price.get().equals("£ 1000,00"));
+        assertTrue(viewModel.price.get().startsWith("£ 1000") );
+    }
+    @Test
+    public void test_smsCommand_Invokes_CommunicationService() throws Exception {
+        AdDetailModel detailModel = new AdDetailModel(new AdDetailsRestModel());
+        detailModel.getValue().setPrice(1000);
+        detailModel.getValue().setContactInformation(new ContactInformation("123","test","test@mail.com"));
+        when(service.getDetail(anyString())).thenReturn(Observable.just(detailModel));
+
+        viewModel.start(anyString());
+        viewModel.sendSMSCommand();
+
+        verify(communicationService).sendSMS("123");
     }
 
+    @Test
+    public void test_phoneCallCommand_Invokes_CommunicationService() throws Exception {
+        AdDetailModel detailModel = new AdDetailModel(new AdDetailsRestModel());
+        detailModel.getValue().setPrice(1000);
+        detailModel.getValue().setContactInformation(new ContactInformation("123","test","test@mail.com"));
+        when(service.getDetail(anyString())).thenReturn(Observable.just(detailModel));
+
+        viewModel.start(anyString());
+        viewModel.makePhoneCallCommand();
+
+        verify(communicationService).call("123");
+    }
+
+    @Test
+    public void test_emailCommand_Invokes_CommunicationService() throws Exception {
+        AdDetailModel detailModel = new AdDetailModel(new AdDetailsRestModel());
+        detailModel.getValue().setTitle("test");
+        detailModel.getValue().setPrice(1000);
+        detailModel.getValue().setContactInformation(new ContactInformation("123","test","test@mail.com"));
+
+        when(service.getDetail(anyString())).thenReturn(Observable.just(detailModel));
+
+        viewModel.start(anyString());
+        viewModel.sendEmailCommand();
+
+        verify(communicationService).sendEmail(eq("test@mail.com"),eq("test"),any());
+    }
     @Test
     public void stop() throws Exception {
 

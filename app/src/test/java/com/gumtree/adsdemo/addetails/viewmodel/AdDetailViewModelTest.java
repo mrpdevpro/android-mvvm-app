@@ -1,11 +1,13 @@
 package com.gumtree.adsdemo.addetails.viewmodel;
 
+import com.gumtree.adsdemo.R;
 import com.gumtree.adsdemo.RxImmediateSchedulerRule;
 import com.gumtree.adsdemo.addetails.domain.AdDetailDomainService;
 import com.gumtree.adsdemo.addetails.domain.AdDetailModel;
 import com.gumtree.adsdemo.addetails.net.models.AdDetailsRestModel;
 import com.gumtree.adsdemo.addetails.net.models.ContactInformation;
 import com.gumtree.adsdemo.ui.services.CommunicationService;
+import com.gumtree.adsdemo.ui.services.DialogService;
 import com.gumtree.adsdemo.ui.services.TextProvider;
 
 import org.junit.Before;
@@ -38,6 +40,9 @@ public class AdDetailViewModelTest {
 
     @Mock
     TextProvider textProvider;
+
+    @Mock
+    DialogService dialogService;
     @Rule
     public RxImmediateSchedulerRule rxSchedulersTestRule = new RxImmediateSchedulerRule();
 
@@ -45,7 +50,7 @@ public class AdDetailViewModelTest {
 
     @Before
     public void setUp() throws Exception {
-        viewModel = new AdDetailViewModel(service,communicationService,textProvider);
+        viewModel = new AdDetailViewModel(service,communicationService,textProvider,dialogService);
     }
 
     @Test
@@ -119,6 +124,33 @@ public class AdDetailViewModelTest {
 
         verify(communicationService).sendEmail(eq("test@mail.com"),eq("test"),any());
     }
+
+    @Test
+    public void test_shareCommand_Invokes_CommunicationService() throws Exception {
+        AdDetailModel detailModel = new AdDetailModel(new AdDetailsRestModel());
+        detailModel.getValue().setTitle("test");
+        detailModel.getValue().setPrice(1000);
+        detailModel.getValue().setContactInformation(new ContactInformation("123","test","test@mail.com"));
+
+        when(service.getDetail(anyString())).thenReturn(Observable.just(detailModel));
+        when(textProvider.getString(R.string.share_subject)).thenReturn(anyString());
+
+        viewModel.start("");
+        viewModel.sharePostCommand();
+
+        verify(communicationService).shareContent(anyString(),anyString());
+    }
+
+    @Test
+    public void test_bookmarkpostCommand_Invokes_DialogService() throws Exception {
+        when(textProvider.getString(R.string.bookmark_sent)).thenReturn(anyString());
+
+        viewModel.bookMarkPostCommand();
+
+        verify(dialogService).displaySimpleMessage(anyString());
+    }
+
+
     @Test
     public void stop() throws Exception {
 

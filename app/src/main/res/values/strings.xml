@@ -97,4 +97,8 @@
     <string name="email">email</string>
     <string name="image_description">image</string>
     <string name="email_template">Hi I am interested for the above ad</string>
+    <string name="share">Share with...</string>
+    <string name="bookmark">bookmark</string>
+    <string name="share_subject">Saw this on GumTree</string>
+    <string name="bookmark_sent">bookmark saved</string>
 </resources>

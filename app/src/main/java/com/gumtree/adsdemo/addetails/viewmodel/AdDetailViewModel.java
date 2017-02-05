@@ -11,6 +11,7 @@ import com.gumtree.adsdemo.addetails.domain.AdDetailModel;
 import com.gumtree.adsdemo.addetails.net.models.AdditionalInformation;
 import com.gumtree.adsdemo.addetails.net.models.AddressDetail;
 import com.gumtree.adsdemo.ui.services.CommunicationService;
+import com.gumtree.adsdemo.ui.services.DialogService;
 import com.gumtree.adsdemo.ui.services.TextProvider;
 
 import java.util.ArrayList;
@@ -25,12 +26,17 @@ public class AdDetailViewModel extends BaseObservable {
     private AdDetailDomainService adDetailNetService;
     private final CommunicationService communicationService;
     private final TextProvider textProvider;
+    private final DialogService dialogService;
     private Subscription subscription;
 
-    public AdDetailViewModel(AdDetailDomainService adDetailNetService, CommunicationService communicationService,TextProvider textProvider) {
+    public AdDetailViewModel(AdDetailDomainService adDetailNetService,
+                             CommunicationService communicationService,
+                             TextProvider textProvider,
+                             DialogService dialogService) {
         this.adDetailNetService = adDetailNetService;
         this.communicationService = communicationService;
         this.textProvider = textProvider;
+        this.dialogService = dialogService;
     }
 
     public ObservableField<String> contactName = new ObservableField<>();
@@ -98,4 +104,14 @@ public class AdDetailViewModel extends BaseObservable {
     public void makePhoneCallCommand(){
         communicationService.call(contactTel.get());
     }
+
+    public void sharePostCommand() {
+        communicationService.shareContent(title.get(),textProvider.getString(R.string.share_subject));
+    }
+
+    public void bookMarkPostCommand() {
+        //just notifying the user with a simple toast
+        dialogService.displaySimpleMessage(textProvider.getString(R.string.bookmark_sent));
+    }
+
 }

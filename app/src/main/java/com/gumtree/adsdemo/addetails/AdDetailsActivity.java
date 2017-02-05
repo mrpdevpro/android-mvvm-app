@@ -59,7 +59,13 @@ public class AdDetailsActivity extends GumTreeActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_share) {
+            viewModel.sharePostCommand();
+            return true;
+        }
+
+        if (id == R.id.action_bookmark) {
+            viewModel.bookMarkPostCommand();
             return true;
         }
         if(id == android.R.id.home){
@@ -70,8 +76,8 @@ public class AdDetailsActivity extends GumTreeActivity {
 
     @Override
     protected void onStart() {
-        viewModel.start(getIntent().getStringExtra("adId"));
         super.onStart();
+        viewModel.start(getIntent().getStringExtra("adId"));
     }
 
     @Override

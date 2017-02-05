@@ -3,6 +3,7 @@ package com.gumtree.adsdemo.di;
 import android.content.Context;
 
 import com.gumtree.adsdemo.ui.services.CommunicationService;
+import com.gumtree.adsdemo.ui.services.DialogService;
 import com.gumtree.adsdemo.ui.services.NavigationService;
 import com.gumtree.adsdemo.ui.services.TextProvider;
 
@@ -36,6 +37,12 @@ public class ActivityModule {
     @ActivityScope
     CommunicationService providesCommunicationService(){
         return new CommunicationService(context);
+    }
+
+    @Provides
+    @ActivityScope
+    DialogService providesDialogService(){
+        return new DialogService(context);
     }
 
 }

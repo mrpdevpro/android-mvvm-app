@@ -1,3 +1,4 @@
-# gumtree
+# Android MVVM App
 
-app
+Sample application with Android Data bindings, Rx.Java, Dagger 2, Retrofit, Mockito, Picasso
+

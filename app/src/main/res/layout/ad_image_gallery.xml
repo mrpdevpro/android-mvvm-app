@@ -3,11 +3,11 @@
 
     <data>
 
-        <import type="com.gumtree.adsdemo.ui.databinding.CommonBindingAdapter"></import>
+        <import type="com.mrpdev.demoapp.ui.databinding.CommonBindingAdapter"></import>
 
         <variable
             name="viewModel"
-            type="com.gumtree.adsdemo.addetails.viewmodel.AdDetailViewModel">
+            type="com.mrpdev.demoapp.addetails.viewmodel.AdDetailViewModel">
 
         </variable>
     </data>

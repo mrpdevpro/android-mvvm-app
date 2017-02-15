@@ -2,12 +2,12 @@
 <layout xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.gumtree.adsdemo.ui.databinding.CommonBindingsConverter"
+        <import type="com.mrpdev.demoapp.ui.databinding.CommonBindingsConverter"
             alias="converter"
             ></import>
         <variable
             name="viewModel"
-            type="com.gumtree.adsdemo.addetails.viewmodel.AdDetailViewModel"></variable>
+            type="com.mrpdev.demoapp.addetails.viewmodel.AdDetailViewModel"></variable>
     </data>
 
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:id="@+id/coordinator"
-        tools:context="com.gumtree.adsdemo.addetails.AdDetailsActivity">
+        tools:context="com.mrpdev.demoapp.addetails.AdDetailsActivity">
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/app_bar"
@@ -66,7 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:context="com.gumtree.adsdemo.addetails.AdDetailsActivity"
+            tools:context="com.mrpdev.demoapp.addetails.AdDetailsActivity"
             tools:showIn="@layout/activity_ad_details">
 
             <LinearLayout

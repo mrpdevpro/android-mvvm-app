@@ -104,6 +104,6 @@
     <string name="map_location_invalid">opening the map is unavailable</string>
     <string name="contact_name_placeholder">Contact :</string>
     <string name="contact_date_posting_from">Posting from :</string>
-    <string name="project_description">Demo App for the GumTree code challenge. Pressing the button below will load the ad details screen. Using MVVM Pattern and Clean Architecture, with the help of Android Data Bindings, Dagger 2, Rx.Java,Mockito, JUnit, Picasso. For testing there are only Unit tests and no UI Tests with e.g. Espresso, as the views are totally testable through the testing of their ViewModels. Emphasis has been given on the solid groundbase of the application rather than the UI. Due to time limitations the UI is not as it should be ideally</string>
+    <string name="project_description">Demo App. Pressing the button below will load the ad details screen. Using MVVM Pattern and Clean Architecture, with the help of Android Data Bindings, Dagger 2, Rx.Java,Mockito, JUnit, Picasso. For testing there are only Unit tests and no UI Tests with e.g. Espresso, as the views are totally testable through the testing of their ViewModels. Emphasis has been given on the solid groundbase of the application rather than the UI. Due to time limitations the UI is not as it should be ideally</string>
 
 </resources>

@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.gumtree.adsdemo.addetails.viewmodel.AdDetailViewModel"></variable>
+            type="com.mrpdev.demoapp.addetails.viewmodel.AdDetailViewModel"></variable>
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

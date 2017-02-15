@@ -5,7 +5,7 @@ import android.databinding.BaseObservable;
 import com.mrpdev.demoapp.ui.services.NavigationService;
 
 /**
- * Created by marios on 4/2/2017.
+ * Created by marios on 4/2/2017.11
  */
 
 public class MainViewModel extends BaseObservable {
